@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MenuItemModel>
+
+<div class="border background-white container col-5">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-info">Edytuj kolejność Produktów</h2>
+            <h6 class="text-info">Przeciągnij wiersz w tabeli aby zmienić jego kolejność.</h6>
+        </div>
+    </div>
+    <br />
+    <div>
+        <form method="POST" asp-action="EditOrder">
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-striped border" id="tblCategory">
+                    <tr class="table-secondary">
+                        <th>
+                            @Html.DisplayNameFor(m => m.Name)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.OrderBy(x => x.Order))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Name)
+                                <input type="hidden" name="LocationId" value="@item.Id" />
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    }
+                </table>
+                <partial name="_EditOrderAndBackToListButtonPartial" />
+
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#tblCategory").sortable({
+                items: 'tr:not(tr:first-child)',
+                cursor: 'pointer',
+                axis: 'y',
+                dropOnEmpty: false,
+                start: function (e, ui) {
+                    ui.item.addClass("selected");
+                },
+                stop: function (e, ui) {
+                    ui.item.removeClass("selected");
+                },
+                receive: function (e, ui) {
+                    $(this).find("tbody").append(ui.item);
+                }
+            });
+        });
+    </script>
+}

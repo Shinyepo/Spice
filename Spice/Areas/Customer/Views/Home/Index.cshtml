@@ -1,0 +1,126 @@
+﻿@model Spice.Models.ViewModels.IndexViewModel
+
+    <img src="~/images/baner-main.png" style="z-index:-1;left:0;margin-left:0;margin-top:-1rem;object-fit:-10% 0;" class="img-fluid position-absolute" />
+    <br />
+
+    @*@if (Model.Coupon.Count() > 0)
+        {
+            <div class="border mb-5">
+                <div class="carousel" data-ride="carousel" data-interval="2500">
+                    @for (int i = 0; i < Model.Coupon.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="carousel-item active">
+
+                                @{
+                                    var base64 = Convert.ToBase64String(Model.Coupon.ToList()[i].Image);
+                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                }
+                                <img src="@imgsrc" height="50px" class="d-block w-100" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item">
+
+                                @{
+                                    var base64 = Convert.ToBase64String(Model.Coupon.ToList()[i].Image);
+                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                }
+                                <img src="@imgsrc" height="50px" class="d-block w-100" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }*@
+    <br />
+    <br />
+
+    <div class="background-white container" style="margin-top:6rem;">
+
+        <ul id="menu-filters" class="menu-filter-list list-inline text-center">
+            <li class="active btn btn-secondary ml-1 mr-1" data-filter=".menu-restaurant">
+                Wszystko
+            </li>
+            @foreach (var item in Model.Category.OrderBy(x => x.Order))
+            {
+                <li class="ml-1 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">
+                    @item.Name
+                </li>
+            }
+        </ul>
+        @foreach (var item in Model.Category.OrderBy(x => x.Order))
+        {
+            <div class="row" id="menu-wrapper">
+                <partial name="_ThumbnailAreaPartial" model="@Model.MenuItem.Where(x=>x.Category.Name == item.Name).OrderBy(x=>x.Order)" />
+            </div>
+        }
+    </div>
+
+
+    <div id='myModal' class='modal fade' tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+
+    </div>
+    @section Scripts {
+        <script>
+            var posts = $('.post');
+
+            (function ($) {
+                $("#menu-filters li").click(function () {
+                    $('#menu-filters li').removeClass("active btn btn-secondary");
+                    $(this).addClass("active btn btn-secondary");
+
+                    var selectedFilter = $(this).data("filter");
+                    $(".menu-restaurant").fadeOut();
+
+                    setTimeout(function () {
+                        $(selectedFilter).slideDown();
+
+                    }, 300);
+                });
+            })(jQuery);
+
+        </script>
+        <script>
+            var TeamDetailPostBackURL = 'Customer/Home/Details';
+            $(function () {
+                $(".itemDetail").click(function () {
+                    var $buttonClicked = $(this);
+                    var id = $buttonClicked.attr('data-id');
+                    var options = { "backdrop": "static", keyboard: true };
+                    $.ajax({
+                        type: "GET",
+                        url: TeamDetailPostBackURL,
+                        contentType: "application/json; charset=utf-8",
+                        data: { "Id": id },
+                        datatype: "json",
+                        success: function (data) {
+                            $('#myModalContent').html(data);
+                            $('#myModal').modal(options);
+                            $('#myModal').modal('show');
+
+                        },
+                        error: function () {
+                            alert("Dynamic content load failed.");
+                        }
+                    });
+                });
+                //$("#closebtn").on('click',function(){
+                //    $('#myModal').modal('hide');
+
+                $("#closebtn").click(function () {
+                    $('#myModal').modal('hide');
+                });
+
+            });
+
+        </script>
+
+    }

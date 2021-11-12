@@ -1,0 +1,95 @@
+﻿@model ShoppingCartModel
+@using Spice.Extensions
+@{
+    var SizeList = new SelectList(new List<SelectListItem>
+{
+    new SelectListItem {Text = "Mała - 20cm", Value = "0"},
+    new SelectListItem {Text = "Średnia - 32cm", Value = "1"},
+    new SelectListItem {Text = "Duża - 35cm", Value = "2"}
+    }, "Value", "Text");
+}
+<div class="modal-header">
+    <h2 class="modal-title">@Model.MenuItem.Name</h2>
+    <br />
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <br />
+</div>
+<form method="post" class="modal-body pb-1" asp-action="Details" autocomplete="off">
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="MenuItemId" />
+        <input type="hidden" asp-for="MenuItem.Name" />
+        <input type="hidden" asp-for="MenuItem.Price" />
+        <div class="col-12">
+            <div class="form-group row">
+                <div class="col-2">
+                    <label class="col-form-label">Wielkość</label>
+                </div>
+                <div class="col-5">
+                    <select id="pSize" asp-items="SizeList" onchange="calcPrize(this);" asp-for="Size" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Count" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <a class="btn btn-danger text-white input-group-text" id="btnCountMinus">
+                                <i class="fas fa-minus"></i>
+                            </a>
+                        </div>
+                        <input class="form-control text-center" readonly asp-for="Count" id="pCount" type="text" />
+                        <div class="input-group-prepend">
+                            <a class="btn btn-danger text-white input-group-text" id="btnCountPlus">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="MenuItem.Price" class="col-form-label"></label>
+                </div>
+                <div class="col-2">
+                    <label id="priceField" class="col-form-label font-weight-bold">@Model.MenuItem.Price zł</label>
+                </div>
+                <div class="col-5 offset-3">
+                    <button type="submit" value="Dodaj do Koszyka" class="btn btn-primary form-control">Do Koszyka</button>
+                </div>
+                @*<div class="col-3 offset-1">
+                        <button type="button" id="closebtn" data-dismiss="modal" class="btn btn-secondary form-control">Zamknij</button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    function calcPrize () {
+        var priceField = document.getElementById("priceField");
+        var input = document.getElementById("pCount");
+        var selected = document.getElementById("pSize").selectedIndex;
+
+        var totalCost = (@Model.MenuItem.Price + (7 * selected)) * input.value;
+        priceField.textContent = totalCost + " zł";
+        console.log("calc end");
+    };
+    $("#btnCountPlus").click(function () {
+        var input = document.getElementById("pCount");
+        input.value = parseInt(input.value) + 1;
+        calcPrize();
+    });
+    $("#btnCountMinus").click(function () {
+        var input = document.getElementById("pCount");
+        var val = parseInt(input.value);
+        if (val > 1) {
+            val -= 1;
+            input.value = val;
+        };
+        calcPrize();
+    });
+</script>

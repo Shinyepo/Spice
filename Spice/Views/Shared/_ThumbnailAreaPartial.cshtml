@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MenuItemModel>
+
+
+@if (Model.Count() > 0)
+{
+    <div class="col-12 post card @Model.FirstOrDefault().Category.Name.Replace(" ", string.Empty) menu-restaurant">
+        <div class="row card-header">
+            <h2 class=" pt-2">@Model.FirstOrDefault().Category.Name</h2>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-12 card-body @( item.Id == Model.Last().Id? "pb-4":"pb-0")">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                        <img src="@item.Image" width="250px" height="180px" style="border-radius: 5px; border: 1px solid #bbb9b9" />
+                    </div>
+                    <div class="col-md-9 cl-sm-12">
+                        <div class="row pr-3">
+                            <div class="col-8">
+                                <h4 class="text-primary text-dark font-weight-bold d-inline-block">@item.Name</h4>
+                                @if (item.Spicyness == "1")
+                                {
+                                    <img src="~/images/mild.png" title="Łagodne" />
+                                }
+                                @if (item.Spicyness == "2")
+                                {
+                                    <img src="~/images/spicy.png" title="Ostre" />
+                                }
+                                @if (item.Spicyness == "3")
+                                {
+                                    <img src="~/images/verySpicy.png" title="Bardzo ostre" />
+                                }
+                            </div>
+                            <div class="col-4 text-right text-danger">
+                                <h4>od @item.Price zł</h4>
+                            </div>
+                        </div>
+                        <div class="row col-12 text-justify d-none d-md-block">
+                            <p>@Html.Raw(item.Description)</p>
+                        </div>
+                        <div class="col-md-3 col-sm-12 offset-md-9 text-center position-absolute" style="right:0;bottom:0;">
+                            <a href="javascript:void(0);" class="btn btn-success form-control itemDetail" data-id="@item.Id">Dodaj</a>
+                        </div>
+                    </div>
+                </div>
+                @if (item.Id != Model.Last().Id)
+                {
+                    <hr />
+                }
+            </div>
+        }
+    </div>
+    <div class="p-4"></div>
+
+}

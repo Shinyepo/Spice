@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CategoryModel>
+<div class="border background-white">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Lista Kategorii</h2>
+        </div>
+        <div class="col-6 text-right">
+            <partial name="_CreateButtonPartial" />
+        </div>
+    </div>
+    <br />
+    <div>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(m => m.Name)
+                    </th>
+                    <th></th>
+                    <th class="text-right"><a asp-action="EditOrder" class="btn btn-outline-info"><i class="fas fa-sort"></i>&nbsp;Sortuj</a></th>
+                </tr>
+                @foreach (var item in Model.OrderBy(x=>x.Order))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.Name)
+                        </td>
+                        <td>
+                            <partial name="_TableButtonPartial" model="item.Id"/>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>Brak Kategorii.</p>
+        }
+    </div>
+</div>
