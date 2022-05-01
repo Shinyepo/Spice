@@ -20,26 +20,26 @@
                                 <h4 class="text-primary text-dark font-weight-bold d-inline-block">@item.Name</h4>
                                 @if (item.Spicyness == "1")
                                 {
-                                    <img src="~/images/mild.png" title="Łagodne" />
+                                    <img src="~/images/mild.png" title="Mild" />
                                 }
                                 @if (item.Spicyness == "2")
                                 {
-                                    <img src="~/images/spicy.png" title="Ostre" />
+                                    <img src="~/images/spicy.png" title="Spicy" />
                                 }
                                 @if (item.Spicyness == "3")
                                 {
-                                    <img src="~/images/verySpicy.png" title="Bardzo ostre" />
+                                    <img src="~/images/verySpicy.png" title="Very Spicy" />
                                 }
                             </div>
                             <div class="col-4 text-right text-danger">
-                                <h4>od @item.Price zł</h4>
+                                <h4>from $@item.Price</h4>
                             </div>
                         </div>
                         <div class="row col-12 text-justify d-none d-md-block">
                             <p>@Html.Raw(item.Description)</p>
                         </div>
                         <div class="col-md-3 col-sm-12 offset-md-9 text-center position-absolute" style="right:0;bottom:0;">
-                            <a href="javascript:void(0);" class="btn btn-success form-control itemDetail" data-id="@item.Id">Dodaj</a>
+                            <a href="javascript:void(0);" class="btn btn-success form-control itemDetail" data-id="@item.Id">Add</a>
                         </div>
                     </div>
                 </div>

@@ -30,14 +30,14 @@
                         {
                             <li class="nav-item dropdown text-white-50">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="NavbarDropDownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Zarządzanie zawartością
+                                    Content Management
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="NavbarDropDownMenuLink">
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="Category" asp-area="Admin">Kategorie</a>
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="SubCategory" asp-area="Admin">Podkategorie</a>
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="MenuItem" asp-area="Admin">Karta Menu</a>
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="Coupon" asp-area="Admin">Kupony</a>
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="Admin">Użytkownicy</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Category" asp-area="Admin">Categories</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="SubCategory" asp-area="Admin">Sub Categories</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="MenuItem" asp-area="Admin">Menu</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Coupon" asp-area="Admin">Coupons</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="Admin">Users</a>
                                 </div>
                             </li>
                         }
@@ -45,7 +45,7 @@
                         {
                             <li>
                                 <a asp-action="OrderHistory" asp-controller="Order" asp-area="Customer" class="nav-link text-white">
-                                    Historia Zamówień
+                                    Order History
                                 </a>
                             </li>
                         }
@@ -53,16 +53,16 @@
                         {
                             <li class="nav-item dropdown text-white-50">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="NavbarOrdersDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Zamówienia
+                                    Orders
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="NavbarOrdersDropdown">
                                     @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.KitchenUser))
                                     {
-                                        <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" asp-area="Customer">Zarządzaj Zamówieniami</a>
+                                        <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" asp-area="Customer">Orders Management</a>
                                     }
                                     @if (User.IsInRole(SD.FrontDeskUser) || User.IsInRole(SD.ManagerUser))
                                     {
-                                        <a class="dropdown-item" asp-action="OrderPickup" asp-controller="Order" asp-area="Customer">Gotowe Zamówienia</a>
+                                        <a class="dropdown-item" asp-action="OrderPickup" asp-controller="Order" asp-area="Customer">Ready Orders</a>
                                     }
                                 </div>
                             </li>
@@ -103,7 +103,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Pizzeria - <a asp-area="Customer" asp-controller="Home" asp-action="Privacy">Polityka prywatności</a>
+            &copy; 2021 - Pizzeria - <a asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

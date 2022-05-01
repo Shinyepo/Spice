@@ -24,17 +24,17 @@ namespace Spice.Models
 
         [ForeignKey("MenuItemId")]
         public virtual MenuItemModel MenuItem { get; set; }
-        [Display(Name = "Ilość")]
+        [Display(Name = "Count")]
         public int Count { get; set; }
-        [Display(Name = "Nazwa")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
-        [Display(Name = "Opis")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "Wielkość")]
+        [Display(Name = "Size")]
         public int Size { get; set; }
 
         [Required]
-        [Display(Name = "Cena")]
+        [Display(Name = "Price")]
         public double Price { get; set; }
     }
 }

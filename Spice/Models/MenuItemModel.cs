@@ -14,18 +14,18 @@ namespace Spice.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Nazwa")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
-        [Display(Name = "Opis")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "Ostrość")]
+        [Display(Name = "Spicyness")]
         public string Spicyness { get; set; }
         public enum Espicy { NA = 0, Łagodny = 1, Ostry = 2, BardzoOstry = 3 }
         
-        [Display(Name = "Zdjęcie")]
+        [Display(Name = "Image")]
         public string Image { get; set; }
 
-        [Display(Name = "Kategoria")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
@@ -34,14 +34,14 @@ namespace Spice.Models
         [ForeignKey("SubCategoryId")]
         public virtual SubCategoryModel SubCategory { get; set; }
 
-        [Display(Name = "Podkategoria")]
+        [Display(Name = "Sub Category")]
         public int SubCategoryId { get; set; }
 
-        [Display(Name = "Cena")]
-        [Range(1, int.MaxValue, ErrorMessage = "Cena musi być większa od ${1}")]
+        [Display(Name = "Price")]
+        [Range(1, int.MaxValue, ErrorMessage = "Price must be greater than ${1}")]
         public double Price { get; set; }
 
-        [Display(Name = "Kolejność wyświetlania")]
+        [Display(Name = "Display Order")]
         public int Order { get; set; }
     }
 }

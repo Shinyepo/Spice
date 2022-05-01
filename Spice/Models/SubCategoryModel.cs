@@ -12,18 +12,18 @@ namespace Spice.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name="Nazwa Podkategorii")]
+        [Display(Name="Category Name")]
         [Required]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name="Kategoria")]
+        [Display(Name="Category")]
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual CategoryModel Category { get; set; }
 
-        [Display(Name = "Kolejność wyświetlania")]
+        [Display(Name = "Display Order")]
         public int Order { get; set; }
     }
 }

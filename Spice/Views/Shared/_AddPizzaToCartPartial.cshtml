@@ -3,9 +3,9 @@
 @{
     var SizeList = new SelectList(new List<SelectListItem>
 {
-    new SelectListItem {Text = "Mała - 20cm", Value = "0"},
-    new SelectListItem {Text = "Średnia - 32cm", Value = "1"},
-    new SelectListItem {Text = "Duża - 35cm", Value = "2"}
+    new SelectListItem {Text = "Small - 20cm", Value = "0"},
+    new SelectListItem {Text = "Medium - 32cm", Value = "1"},
+    new SelectListItem {Text = "Big - 35cm", Value = "2"}
     }, "Value", "Text");
 }
 <div class="modal-header">
@@ -23,7 +23,7 @@
         <div class="col-12">
             <div class="form-group row">
                 <div class="col-2">
-                    <label class="col-form-label">Wielkość</label>
+                    <label class="col-form-label">Size</label>
                 </div>
                 <div class="col-5">
                     <select id="pSize" asp-items="SizeList" onchange="calcPrize(this);" asp-for="Size" class="form-control"></select>
@@ -54,10 +54,10 @@
                     <label asp-for="MenuItem.Price" class="col-form-label"></label>
                 </div>
                 <div class="col-2">
-                    <label id="priceField" class="col-form-label font-weight-bold">@Model.MenuItem.Price zł</label>
+                    <label id="priceField" class="col-form-label font-weight-bold">$@Model.MenuItem.Price</label>
                 </div>
                 <div class="col-5 offset-3">
-                    <button type="submit" value="Dodaj do Koszyka" class="btn btn-primary form-control">Do Koszyka</button>
+                    <button type="submit" value="Add to Cart" class="btn btn-primary form-control">Add to Cart</button>
                 </div>
                 @*<div class="col-3 offset-1">
                         <button type="button" id="closebtn" data-dismiss="modal" class="btn btn-secondary form-control">Zamknij</button>
@@ -76,7 +76,6 @@
 
         var totalCost = (@Model.MenuItem.Price + (7 * selected)) * input.value;
         priceField.textContent = totalCost + " zł";
-        console.log("calc end");
     };
     $("#btnCountPlus").click(function () {
         var input = document.getElementById("pCount");

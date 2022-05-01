@@ -32,8 +32,8 @@ namespace Spice.Models
                
         public int Size { get; set; }
 
-        [Display(Name = "Ilość")]
-        [Range(1,int.MaxValue, ErrorMessage = "Proszę podać wartość większą od 1")]
+        [Display(Name = "Count")]
+        [Range(1,int.MaxValue, ErrorMessage = "Please insert value greater than 1")]
         public int Count { get; set; }
 
 

@@ -11,11 +11,11 @@ namespace Spice.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name="Nazwa Kategorii")]
+        [Display(Name= "Name")]
         [Required]
         public string Name { get; set; }
 
-        [Display(Name = "Kolejność wyświetlania")]
+        [Display(Name = "Display Order")]
         public int Order { get; set; }
 
     }

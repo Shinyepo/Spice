@@ -15,16 +15,16 @@ namespace Spice.Utility
         public const string FrontDeskUser = "FrontDesk";
         public const string CustomerEndUser = "Customer";
 
-        public const string StatusSubmited = "Przyjęte";
-        public const string StatusInProcess = "W przygotowaniu";
-        public const string StatusReady = "Gotowe do odebrania";
-        public const string StatusReadyDelivery = "W dostarczeniu";
-        public const string StatusCompleted = "Zakończone";
-        public const string StatusCancelled = "Anulowane";
+        public const string StatusSubmited = "Accepted";
+        public const string StatusInProcess = "In Preparation";
+        public const string StatusReady = "Ready for Pick Up";
+        public const string StatusReadyDelivery = "In Delivery";
+        public const string StatusCompleted = "Completed";
+        public const string StatusCancelled = "Canceled";
 
-        public const string PaymentStatusPending = "Płatność w toku";
-        public const string PaymentStatusApproved = "Płatność zatwierdzona";
-        public const string PaymentStatusRejected = "Płatność odrzucona";
+        public const string PaymentStatusPending = "Payment in Progress";
+        public const string PaymentStatusApproved = "Payment Complete";
+        public const string PaymentStatusRejected = "Payment Declined";
 
 
         public static string ConvertToRawHtml(string source)

@@ -20,38 +20,38 @@ namespace Spice.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]
-        [Display(Name = "Data złożenia zamówienia")]
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
 
         [Required]
-        [Display(Name = "Suma bez obniżki")]
+        [Display(Name = "Order Total without Coupons")]
         public double OrderTotalOriginal { get; set; }
 
         [Required]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        [Display(Name = "Suma")]
+        [Display(Name = "Order Total")]
         public double OrderTotal { get; set; }
 
         [Required]
-        [Display(Name ="Czas dostawy")]
+        [Display(Name ="Pickup Time")]
         public DateTime PickupTime { get; set; }
         
         [Required]
         [NotMapped]
-        [Display(Name = "Dzień dostawy")]
+        [Display(Name = "Pickup Date")]
         public DateTime PickupDate { get; set; }
 
-        [Display(Name = "Kupon")]
+        [Display(Name = "Coupon")]
         public string CouponCode { get; set; }
         public double CouponCodeDiscount { get; set; }
         public string Status { get; set; }
         public string PaymentStatus { get; set; }
         public string Comments { get; set; }
 
-        [Display(Name = "Imię odbiorcy")]
+        [Display(Name = "Name")]
         public string PickupName { get; set; }
 
-        [Display(Name = "Numer Telefonu")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
         public string TransactionId { get; set; }

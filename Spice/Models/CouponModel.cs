@@ -11,23 +11,23 @@ namespace Spice.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [Display(Name = "Kod")]
+        [Display(Name = "Coupon")]
         public string Name { get; set; }
         [Required]
-        [Display(Name = "Typ")]
+        [Display(Name = "Type")]
         public string Type { get; set; }
         public enum ECouponType { Procentowy=0, PLN=1 }
 
         [Required]
-        [Display(Name = "Wartość Kuponu")]
+        [Display(Name = "Discount")]
         public double Discount { get; set; }
 
         [Required]
-        [Display(Name = "Minimalna wartość zamówienia")]
+        [Display(Name = "Minimum Amount")]
         public double MinimumAmount { get; set; }
-        [Display(Name = "Zdjęcie")]
+        [Display(Name = "Image")]
         public byte[] Image { get; set; }
-        [Display(Name = "Aktywny?")]
+        [Display(Name = "Active?")]
         public Boolean IsActive { get; set; }
     }
 }
