@@ -16,7 +16,7 @@ namespace Spice.Models
         [Required]
         [Display(Name = "Type")]
         public string Type { get; set; }
-        public enum ECouponType { Procentowy=0, PLN=1 }
+        public enum ECouponType { Percent=0, Value=1 }
 
         [Required]
         [Display(Name = "Discount")]

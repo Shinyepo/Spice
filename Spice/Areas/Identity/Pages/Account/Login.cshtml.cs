@@ -90,7 +90,12 @@ namespace Spice.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var user = await _db.ApplicationUser.Where(x => x.Email == Input.Email).FirstOrDefaultAsync();
+                var user = await _db.ApplicationUser.Where(x => x.Email == Input.Email).FirstOrDefaultAsync(); 
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
+                }
 
                 var userClaims = await _userManager.GetClaimsAsync(user);
                 var hasClaim = userClaims.FirstOrDefault(x => x.Type == "UserDisplayName");

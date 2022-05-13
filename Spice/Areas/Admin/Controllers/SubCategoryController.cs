@@ -68,7 +68,7 @@ namespace Spice.Areas.Admin.Controllers
                 var AlreadyExists = _db.SubCategory.Include(x => x.Category).Where(x => x.Name == model.SubCategory.Name && x.CategoryId == model.SubCategory.CategoryId);
                 if (AlreadyExists.Count() > 0)
                 {
-                    StatusMessage = "Error: Sub Category exists under " + AlreadyExists.First().Category.Name + " category. Please use different name!";
+                    StatusMessage = "Error: Subcategory exists under " + AlreadyExists.First().Category.Name + " category. Please use different name!";
                 }
                 else
                 {
@@ -179,7 +179,7 @@ namespace Spice.Areas.Admin.Controllers
                 var AlreadyExists = _db.SubCategory.Include(x => x.Category).Where(x => x.Name == model.SubCategory.Name && x.CategoryId == model.SubCategory.CategoryId);
                 if (AlreadyExists.Count() > 0)
                 {
-                    StatusMessage = "Error: Sub Category exists under " + AlreadyExists.First().Category.Name + " category. Please use different name!";
+                    StatusMessage = "Error: Subcategory exists under " + AlreadyExists.First().Category.Name + " category. Please use different name!";
                     model.SubCategory.Id = id;
                 }
                 else

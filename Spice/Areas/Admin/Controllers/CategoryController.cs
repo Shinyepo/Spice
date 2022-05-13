@@ -67,7 +67,7 @@ namespace Spice.Areas.Admin.Controllers
                 var sub = new SubCategoryModel()
                 {
                     CategoryId = Category.Id,
-                    Name = "Brak",
+                    Name = "Not Set",
                     Order = _db.SubCategory.Count()
                 };
                 _db.SubCategory.Add(sub);

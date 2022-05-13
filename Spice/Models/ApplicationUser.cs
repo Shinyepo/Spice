@@ -13,16 +13,22 @@ namespace Spice.Models
 {
     public class ApplicationUser: IdentityUser
     {
+        [PersonalData]
         [Display(Name = "Name")]
         public string Name { get; set; }
+        [PersonalData]
         [Display(Name = "Street Adress")]
         public string StreetAdress { get; set; }
+        [PersonalData]
         [Display(Name = "Street Number")]
         public string StreetNumber { get; set; }
+        [PersonalData]
         [Display(Name = "House Number")]
         public string HouseNumber { get; set; }
+        [PersonalData]
         [Display(Name = "City")]
         public string City { get; set; }
+        [PersonalData]
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
 

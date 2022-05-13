@@ -32,7 +32,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label>Estimated Time Arrival</label>
+                    <label>ETA</label>
                 </div>
                 <div class="col-9">
                     <input value="@Model.OrderHeader.OrderDate.ToShortDateString() @Model.OrderHeader.OrderDate.AddMinutes(90).ToShortTimeString()" disabled class="form-control" />
@@ -58,12 +58,25 @@
                 {
                     <li class="list-group-item d-flex justify-content-between">
                         <div>
-                            <h6 class="my-0">@item.Name</h6>
+                            <h6 class="my-0">@item.Name
+                            @if (item.Size == 0 && item.MenuItem.Category.Name == "Pizza")
+                                                    {
+                                                        <span class="text-muted small"> - Small</span>
+                                                    }
+                                                    @if (item.Size == 1 && item.MenuItem.Category.Name == "Pizza")
+                                                    {
+                                                        <span class="text-muted small"> - Medium</span>
+                                                    }
+                                                    @if (item.Size == 2 && item.MenuItem.Category.Name == "Pizza")
+                                                    {
+                                                        <span class="text-muted small"> - Large</span>
+                                                    }
+                                                    </h6>
                             <small class="text-muted">Count: @item.Count</small>
                         </div>
-                        <span class="text-muted">@((item.Price + (7 * item.Size)) * item.Count) zł</span>
+                        <span class="text-muted">$@((item.Price + (4 * item.Size)) * item.Count)</span>
                         @{
-                            total += ((item.Price + (7 * item.Size)) * item.Count);
+                            total += ((item.Price + (4 * item.Size)) * item.Count);
                         }
                     </li>
                 }
@@ -72,7 +85,7 @@
                     <li class="list-group-item d-flex justify-content-between">
                         <div class="text-success">
                             <h6 class="my-0">Coupon</h6>
-                            <small class="text-muted">Kod: @Model.OrderHeader.CouponCode</small>
+                            <small class="text-muted">Code: @Model.OrderHeader.CouponCode</small>
                         </div>
                         <span class="text-success">-$@(Math.Round(total-Model.OrderHeader.OrderTotal,2))</span>
                     </li>
@@ -88,7 +101,13 @@
             }
             else
             {
-                <button type="button" disabled class="btn btn-info form-control">@Model.OrderHeader.Status</button>
+                if(Model.OrderHeader.Status == SD.StatusCancelled) {
+                    <button type="button" disabled class="btn btn-danger form-control">@Model.OrderHeader.Status</button>
+
+                } else {
+                    <button type="button" disabled class="btn btn-info form-control">@Model.OrderHeader.Status</button>
+
+                }
 
             }
         </div>

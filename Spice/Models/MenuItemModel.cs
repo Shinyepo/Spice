@@ -20,7 +20,7 @@ namespace Spice.Models
         public string Description { get; set; }
         [Display(Name = "Spicyness")]
         public string Spicyness { get; set; }
-        public enum Espicy { NA = 0, Łagodny = 1, Ostry = 2, BardzoOstry = 3 }
+        public enum Espicy { NA = 0, Mild = 1, Spicy = 2, VerySpicy = 3 }
         
         [Display(Name = "Image")]
         public string Image { get; set; }
@@ -34,7 +34,7 @@ namespace Spice.Models
         [ForeignKey("SubCategoryId")]
         public virtual SubCategoryModel SubCategory { get; set; }
 
-        [Display(Name = "Sub Category")]
+        [Display(Name = "Subcategory")]
         public int SubCategoryId { get; set; }
 
         [Display(Name = "Price")]

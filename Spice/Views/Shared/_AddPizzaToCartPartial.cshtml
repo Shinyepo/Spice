@@ -5,7 +5,7 @@
 {
     new SelectListItem {Text = "Small - 20cm", Value = "0"},
     new SelectListItem {Text = "Medium - 32cm", Value = "1"},
-    new SelectListItem {Text = "Big - 35cm", Value = "2"}
+    new SelectListItem {Text = "Large - 35cm", Value = "2"}
     }, "Value", "Text");
 }
 <div class="modal-header">
@@ -74,8 +74,8 @@
         var input = document.getElementById("pCount");
         var selected = document.getElementById("pSize").selectedIndex;
 
-        var totalCost = (@Model.MenuItem.Price + (7 * selected)) * input.value;
-        priceField.textContent = totalCost + " zł";
+        var totalCost = (@Model.MenuItem.Price + (4 * selected)) * input.value;
+        priceField.textContent = "$" + totalCost;
     };
     $("#btnCountPlus").click(function () {
         var input = document.getElementById("pCount");

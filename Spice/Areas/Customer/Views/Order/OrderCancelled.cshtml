@@ -4,7 +4,7 @@
 <div class="background-white">
     <div class="row px-3">
         <div class="col-8">
-            <h2 class="text-info">Order Accepted!</h2>
+            <h2 class="text-danger">Order Cancelled!</h2>
         </div>
         <div class="col-4 text-right">
             <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info">New Order</a>
@@ -14,7 +14,7 @@
     @if (Model.OrderHeader != null)
     {
         <div class="p-3">
-            Your Order has been Accepted! You can find your Order Details below.
+            Your Order has been Cancelled!
         </div>
         <partial name="_IndividualOrderDetails" model="Model" />
     }

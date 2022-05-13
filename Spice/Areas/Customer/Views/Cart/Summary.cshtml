@@ -15,10 +15,10 @@
                 <div class="card">
                     <div class="card-header bg-dark text-light ml-0 row container">
                         <div class="col-6">
-                            <i class="fas fa-shopping-cart"></i>&nbsp;Podsumowanie Zamówienia
+                            <i class="fas fa-shopping-cart"></i>&nbsp;Order Summary
                         </div>
                         <div class="col-6 text-right">
-                            <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="btn btn-outline-info btn-sm">Wróc do Koszyka</a>
+                            <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="btn btn-outline-info btn-sm">Back To Cart</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -27,12 +27,12 @@
                                 <div class="col-12 col-lg-6 pb-4">
                                     <div class="row">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h4><span class="text-info">Dostawa:</span></h4>
+                                            <h4><span class="text-info">Delivery:</span></h4>
                                         </div>
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-3">
-                                            <label>Imię i Nazwisko</label>
+                                            <label>Name</label>
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.OrderHeader.PickupName" id="txtname" type="text" class="form-control" />
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-3">
-                                            <label>Numer Telefonu</label>
+                                            <label>Phone Number</label>
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.OrderHeader.PhoneNumber" id="txtphone" type="text" class="form-control" />
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-3">
-                                            <label>Data dostawy</label>
+                                            <label>Pickup Date</label>
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.OrderHeader.PickupDate" autocomplete="off" id="datepicker" value="" type="text" class="form-control" />
@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-3">
-                                            <label>Godzina Dostawy</label>
+                                            <label>Pickup Time</label>
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.OrderHeader.PickupTime" autocomplete="off" id="timepicker" value="" type="text" class="form-control" />
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-3">
-                                            <label>Dodatkowe Informacje:</label>
+                                            <label>Additional Information</label>
                                         </div>
                                         <div class="col-9">
                                             <textarea asp-for="@Model.OrderHeader.Comments" style="height:100px;" class="form-control"></textarea>
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-12 col-lg-5 offset-lg-1">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4><span class="text-info">Podsumowanie Zamówienia:</span></h4>
+                                        <h4><span class="text-info">Order Summary:</span></h4>
                                     </div>
                                     <ul class="list-group mb-3">
                                         @{ var total = 0.0;}
@@ -81,38 +81,39 @@
                                         {
                                             <li class="list-group-item d-flex justify-content-between">
                                                 <div>
-                                                    <h6 class="my-0">@item.MenuItem.Name</h6>
-                                                    @if (item.Size == 0 && item.MenuItem.Category.Name == "Pizze")
+                                                    <h6 class="my-0">@item.MenuItem.Name
+                                                    @if (item.Size == 0 && item.MenuItem.Category.Name == "Pizza")
                                                     {
-                                                        <span class="text-muted small"> - Mała</span>
+                                                        <span class="text-muted small"> - Small</span>
                                                     }
-                                                    @if (item.Size == 1 && item.MenuItem.Category.Name == "Pizze")
+                                                    @if (item.Size == 1 && item.MenuItem.Category.Name == "Pizza")
                                                     {
-                                                        <span class="text-muted small"> - Średnia</span>
+                                                        <span class="text-muted small"> - Medium</span>
                                                     }
-                                                    @if (item.Size == 2 && item.MenuItem.Category.Name == "Pizze")
+                                                    @if (item.Size == 2 && item.MenuItem.Category.Name == "Pizza")
                                                     {
-                                                        <span class="text-muted small"> - Duża</span>
+                                                        <span class="text-muted small"> - Large</span>
                                                     }
-                                                    <small class="text-muted">Ilość: @item.Count</small>
+                                                    </h6>
+                                                    <small class="text-muted">Count: @item.Count</small>
                                                 </div>
-                                                <span class="text-muted">@((item.MenuItem.Price + (7 * item.Size)) * item.Count) zł</span>
-                                                @{ total += ((item.MenuItem.Price + (7 * item.Size)) * item.Count);}
+                                                <span class="text-muted">$@((item.MenuItem.Price + (4 * item.Size)) * item.Count)</span>
+                                                @{ total += ((item.MenuItem.Price + (4 * item.Size)) * item.Count);}
                                             </li>
                                         }
                                         @if (Model.OrderHeader.CouponCode != null)
                                         {
                                             <li class="list-group-item d-flex justify-content-between">
                                                 <div class="text-success">
-                                                    <h6 class="my-0">Kupon:</h6>
+                                                    <h6 class="my-0">Coupon:</h6>
                                                     <small class="text-success">@Model.OrderHeader.CouponCode.ToUpper()</small>
                                                 </div>
-                                                <span class="text-success">-@(Math.Round(total-Model.OrderHeader.OrderTotal,2)) zł</span>
+                                                <span class="text-success">-$@(Math.Round(total-Model.OrderHeader.OrderTotal,2))</span>
                                             </li>
                                         }
                                         <li class="list-group-item d-flex justify-content-between bg-light">
-                                            <strong class="text-info">Suma</strong>
-                                            <strong class="text-info">@Model.OrderHeader.OrderTotal zł</strong>
+                                            <strong class="text-info">Total</strong>
+                                            <strong class="text-info">$@Model.OrderHeader.OrderTotal</strong>
                                         </li>
                                     </ul>
                                 </div>
@@ -126,7 +127,7 @@
                                 @{ 
                                     var ordertotalforstripe = Model.OrderHeader.OrderTotal * 100;
                                 }
-                                <button type="submit" id="btnPlaceOrder" onclick="return validateInput()" value="Złóż Zamówienie" class="btn btn-success form-control">Złóż Zamówienie</button>
+                                <button type="submit" id="btnPlaceOrder" onclick="return validateInput()" value="Place Order" class="btn btn-success form-control">Place Order</button>
                             </div>
                         </div>
                     </div>
@@ -136,7 +137,7 @@
     }
     else
     {
-        <div class="background-white-border">Brak przedmiotów w koszyku...</div>
+        <div class="background-white-border">No items in Cart...</div>
     }
 </form>
 
@@ -152,9 +153,11 @@
             }
             
             $("#datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
                 minDate: minDT, maxDate: "+1W"
             });
             $("#timepicker").timepicker({
+                timeFormat: "HH:mm",
                 'minTime': '11:00 AM',
                 'maxTime': '9:00 PM',
                 step: '30'
@@ -164,12 +167,13 @@
 
         function setPickupTime() {
             var dateSelected = document.getElementById("datepicker").value;
-            var dt = new Date(dateSelected);
+            var dateParts = dateSelected.split("/");
+            var dt = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
             var today = new Date();
 
             dt.setHours(0, 0, 0, 0);
             if (dt > today) {
-                selectedTime = '11:00am';
+                selectedTime = '11:00 AM';
             } else {
                 selectedTime = getTimeFromCurrentDate();
             }
@@ -179,22 +183,23 @@
 
         function getTimeFromCurrentDate() {
             var currdate = new Date();
-            var minimumTime = "";
+            var minTime = "";
 
             if (currdate.getHours() < 11) {
-                minimumTime = '12:00pm';
+                minTime = '11:00 AM';
             } else {
                 if (currdate.getMinutes() < 30) {
-                    minimumTime = (currdate.getHours() + 1).toString() + ':30pm';
+                    minTime = (currdate.getHours() + 1).toString() + ':30 AM';
                 } else {
-                    minimumTime = (currdate.getHours() + 2).toString() + ':00pm';
+                    minTime = (currdate.getHours() + 2).toString() + ':00 PM';
 
                 }
             }
-            return minimumTime;
+            return minTime;
         }
 
         $("#datepicker").change(function () {
+            $("#timepicker").val("");
             setPickupTime();
         });
 

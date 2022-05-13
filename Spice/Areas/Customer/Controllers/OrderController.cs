@@ -58,7 +58,42 @@ namespace Spice.Areas.Customer.Controllers
             OrderDetailsViewModel.OrderHeader.PaymentStatus = SD.PaymentStatusApproved;
             OrderDetailsViewModel.OrderHeader.Status = SD.StatusSubmited;
             await _db.SaveChangesAsync();
-            OrderDetailsViewModel.OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == OrderDetailsViewModel.OrderHeader.Id).ToListAsync();
+            OrderDetailsViewModel.OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == OrderDetailsViewModel.OrderHeader.Id).Include(x => x.MenuItem).Include(x=>x.MenuItem.Category).ToListAsync();
+
+            return View(OrderDetailsViewModel);
+        }
+
+        public async Task<IActionResult> OrderCancelled([FromQuery] string session_id)
+        {
+            if (session_id == null) return NotFound();
+            var sessionService = new SessionService();
+            Session session = sessionService.Get(session_id);
+            if (session == null) return NotFound();
+
+            if (session.Status != "open")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var customerService = new CustomerService();
+            var customer = customerService.Get(session.CustomerId);
+
+            var claims = (ClaimsIdentity)this.User.Identity;
+            var claim = claims.FindFirst(ClaimTypes.NameIdentifier);
+
+
+
+            var OrderDetailsViewModel = new OrderDetailsSuccessViewModel()
+            {
+                OrderHeader = await _db.OrderHeader.Include(x => x.ApplicationUser).FirstOrDefaultAsync(x => x.TransactionId == session.PaymentIntentId && x.UserId == claim.Value)
+            };
+
+            OrderDetailsViewModel.OrderHeader.PaymentStatus = SD.StatusCancelled;
+            OrderDetailsViewModel.OrderHeader.Status = SD.StatusCancelled;
+
+            await _db.SaveChangesAsync();
+            sessionService.Expire(session_id);
+
+            OrderDetailsViewModel.OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == OrderDetailsViewModel.OrderHeader.Id).Include(x=>x.MenuItem).Include(x => x.MenuItem.Category).ToListAsync();
 
             return View(OrderDetailsViewModel);
         }
@@ -83,7 +118,7 @@ namespace Spice.Areas.Customer.Controllers
                 OrderDetailsSuccessViewModel ind = new OrderDetailsSuccessViewModel
                 {
                     OrderHeader = item,
-                    OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == item.Id).ToListAsync()
+                    OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == item.Id).Include(x => x.MenuItem).Include(x => x.MenuItem.Category).ToListAsync()
                 };
                 orderListVM.Orders.Add(ind);
             }
@@ -115,7 +150,7 @@ namespace Spice.Areas.Customer.Controllers
                 OrderDetailsSuccessViewModel ind = new OrderDetailsSuccessViewModel
                 {
                     OrderHeader = item,
-                    OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == item.Id).ToListAsync()
+                    OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == item.Id).Include(x => x.MenuItem).Include(x => x.MenuItem.Category).ToListAsync()
                 };
                 OrderVM.Add(ind);
             }
@@ -157,7 +192,7 @@ namespace Spice.Areas.Customer.Controllers
             var OrderDetailsViewModel = new OrderDetailsSuccessViewModel()
             {
                 OrderHeader = await _db.OrderHeader.Include(x => x.ApplicationUser).FirstOrDefaultAsync(x => x.Id == id),
-                OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == id).ToListAsync()
+                OrderDetails = await _db.OrderDetails.Where(x => x.OrderId == id).Include(x => x.MenuItem).Include(x => x.MenuItem.Category).ToListAsync()
             };
             OrderDetailsViewModel.OrderHeader.ApplicationUser = await _db.ApplicationUser.FirstOrDefaultAsync(x => x.Id == OrderDetailsViewModel.OrderHeader.UserId);
 

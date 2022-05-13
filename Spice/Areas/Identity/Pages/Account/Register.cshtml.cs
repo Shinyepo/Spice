@@ -60,28 +60,28 @@ namespace Spice.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Hasło")]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Potwierdź hasło")]
+            [Display(Name = "Confirm Password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "Imię i Nazwisko")]
+            [Display(Name = "Name")]
             public string Name { get; set; }
-            [Display(Name = "Ulica")]
+            [Display(Name = "Street")]
             public string StreetAdress { get; set; }
-            [Display(Name = "Numer domu")]
+            [Display(Name = "Street Number")]
             public string StreetNumber { get; set; }
-            [Display(Name = "Numer mieszkania")]
+            [Display(Name = "House Number")]
             public string HouseNumber { get; set; }
-            [Display(Name = "Miasto")]
+            [Display(Name = "City")]
             public string City { get; set; }
-            [Display(Name = "Kod Pocztowy")]
+            [Display(Name = "Postal Code")]
             public string PostalCode { get; set; }
-            [Display(Name = "Numer Telefonu")]
+            [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
         }
 
@@ -108,8 +108,10 @@ namespace Spice.Areas.Identity.Pages.Account
                     PostalCode = Input.PostalCode,
                     City = Input.City,
                     Name = Input.Name,
-                    StreetAdress = Input.StreetAdress + " " + Input.StreetNumber + Input.HouseNumber == null? "":"/"+Input.HouseNumber,
-                    PhoneNumber = Input.PhoneNumber,                    
+                    StreetAdress = Input.StreetAdress + " " + Input.StreetNumber + (Input.HouseNumber == null? "":"/"+Input.HouseNumber),
+                    StreetNumber = Input.StreetNumber,
+                    HouseNumber = Input.HouseNumber,
+                    PhoneNumber = Input.PhoneNumber,
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

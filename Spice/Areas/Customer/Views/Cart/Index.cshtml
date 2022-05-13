@@ -10,10 +10,10 @@
                 <div class="card">
                     <div class="card-header bg-dark text-light ml-0 row container">
                         <div class="col-6">
-                            <i class="fas fa-shopping-cart"></i>&nbsp;  Koszyk
+                            <i class="fas fa-shopping-cart"></i>&nbsp;  Cart
                         </div>
                         <div class="col-6 text-right">
-                            <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-info btn-sm">Kontynuuj zakupy</a>
+                            <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-info btn-sm">Continue Shopping</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -26,24 +26,24 @@
                                 <div class="col-12 text-sm-center col-lg-5 text-lg-left">
                                     <h4>
                                         <strong>@item.MenuItem.Name</strong>
-                                        @if (item.Size == 0 && item.MenuItem.Category.Name == "Pizze")
+                                        @if (item.Size == 0 && item.MenuItem.Category.Name == "Pizza")
                                         {
-                                            <span class="text-muted small"> - Mała</span>
+                                            <span class="text-muted small"> - Small</span>
                                         }
-                                        @if (item.Size == 1 && item.MenuItem.Category.Name == "Pizze")
+                                        @if (item.Size == 1 && item.MenuItem.Category.Name == "Pizza")
                                         {
-                                            <span class="text-muted small"> - Średnia</span>
+                                            <span class="text-muted small"> - Medium</span>
                                         }
-                                        @if (item.Size == 2 && item.MenuItem.Category.Name == "Pizze")
+                                        @if (item.Size == 2 && item.MenuItem.Category.Name == "Pizza")
                                         {
-                                            <span class="text-muted small"> - Duża</span>
+                                            <span class="text-muted small"> - Large</span>
                                         }
                                         </h4>
                                         <h4><small>@item.MenuItem.Description</small></h4>
                                     </div>
                                     <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
                                         <div class="col-4 text-md-right p-2">
-                                            <h6><strong>@(item.MenuItem.Price + (7 * item.Size)) zł <span class="text-muted">x</span> @item.Count</strong></h6>
+                                            <h6><strong>$@(item.MenuItem.Price + (4 * item.Size)) <span class="text-muted">x</span> @item.Count</strong></h6>
                                         </div>
                                         <div class="col-6 col-sm-4 col-lg-6">
                                             <div class="float-right mx-1">
@@ -70,19 +70,19 @@
                                             <div class="col-12 col-md-5">
                                                 <div class="row">
                                                     <div class="col-7">
-                                                        <input asp-for="@Model.OrderHeader.CouponCode" id="txtCouponCode" class="form-control" placeholder="Kupon..." />
+                                                        <input asp-for="@Model.OrderHeader.CouponCode" id="txtCouponCode" class="form-control" placeholder="Coupon..." />
                                                     </div>
                                                     <div class="col-5">
-                                                        <button type="submit" class="btn form-control btn-outline-success" id="btnCoupon" asp-action="AddCoupon">Użyj</button>
-                                                        <button type="submit" class="btn form-control btn-outline-danger" style="display:none" id="btnRemoveCoupon" asp-action="RemoveCoupon">Usuń</button>
+                                                        <button type="submit" class="btn form-control btn-outline-success" id="btnCoupon" asp-action="AddCoupon">Use</button>
+                                                        <button type="submit" class="btn form-control btn-outline-danger" style="display:none" id="btnRemoveCoupon" asp-action="RemoveCoupon">Remove</button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 offset-md-1 col-lg-4 offset-lg-3 pr-4">
                                                 <ul class="list-group">
                                                     <li class="list-group-item d-flex justify-content-between bg-light">
-                                                        <span class="text-info">Suma</span>
-                                                        <strong class="text-info"><span class="txtOrderTotal">@Model.OrderHeader.OrderTotal zł</span></strong>
+                                                        <span class="text-info">Total</span>
+                                                        <strong class="text-info"><span class="txtOrderTotal">$@Model.OrderHeader.OrderTotal</span></strong>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="col-12 col-lg-4 offset-lg-8 col-md-6 offset-md-6">
-                                            <a asp-action="Summary" asp-area="Customer" asp-controller="Cart" class="btn btn-success form-control">Podsumowanie</a>
+                                            <a asp-action="Summary" asp-area="Customer" asp-controller="Cart" class="btn btn-success form-control">Summary</a>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                     }
                         else
                         {
-                        <div class="background-white-border">Brak przedmiotów w koszyku...</div>
+                        <div class="background-white-border">No items in Cart...</div>
                         }
                     </form>
                     @section Scripts {
@@ -114,6 +114,7 @@
                                     document.getElementById("btnRemoveCoupon").style.display = "none";
                                 }
                             });
+
                         </script>
 
                     }

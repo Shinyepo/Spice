@@ -4,10 +4,10 @@
 <div class="border background-white">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-info">Lista Użytkowników</h2>
+            <h2 class="text-info">User List</h2>
         </div>
         <div class="col-6 text-right">
-            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Dodaj Pracownika</a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Add Worker</a>
         </div>
     </div>
     <br />
@@ -23,7 +23,7 @@
                         @Html.DisplayNameFor(m => m.Email)
                     </th>
                     <th>
-                        Numer Telefonu
+                        Phone Number
                     </th>
                     <th></th>
                     <th></th>
@@ -60,7 +60,7 @@
         }
         else
         {
-            <p>Brak Użytkowników.</p>
+            <p>No Users.</p>
         }
     </div>
 </div>

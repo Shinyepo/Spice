@@ -46,11 +46,11 @@ namespace Spice.Areas.Customer.Controllers
 
             if (cart != null)
             {
-                CartDetails.ShoppingCart = cart.ToList();
+                CartDetails.ShoppingCart = await cart.ToListAsync();
                 foreach (var item in CartDetails.ShoppingCart)
                 {
                     item.MenuItem = await _db.MenuItem.Include(x=>x.Category).FirstOrDefaultAsync(x => x.Id == item.MenuItemId);
-                    CartDetails.OrderHeader.OrderTotal += (item.MenuItem.Price + (7 * item.Size)) * item.Count;
+                    CartDetails.OrderHeader.OrderTotal += (item.MenuItem.Price + (4 * item.Size)) * item.Count;
                     item.MenuItem.Description = SD.ConvertToRawHtml(item.MenuItem.Description);
                     if (item.MenuItem.Description.Length > 100)
                     {
@@ -144,7 +144,7 @@ namespace Spice.Areas.Customer.Controllers
                 foreach (var item in CartDetails.ShoppingCart)
                 {
                     item.MenuItem = await _db.MenuItem.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == item.MenuItemId);
-                    CartDetails.OrderHeader.OrderTotal += (item.MenuItem.Price + (7 * item.Size)) * item.Count;
+                    CartDetails.OrderHeader.OrderTotal += (item.MenuItem.Price + (4 * item.Size)) * item.Count;
                 }
             }
 
@@ -201,7 +201,7 @@ namespace Spice.Areas.Customer.Controllers
                     Count = item.Count,
                     Size = item.Size
                 };
-                CartDetails.OrderHeader.OrderTotalOriginal += (orderdetails.Price + (7 * orderdetails.Size)) * orderdetails.Count;
+                CartDetails.OrderHeader.OrderTotalOriginal += (orderdetails.Price + (4 * orderdetails.Size)) * orderdetails.Count;
                 _db.OrderDetails.Add(orderdetails);
             }
 
@@ -224,8 +224,7 @@ namespace Spice.Areas.Customer.Controllers
                 Customer = user.PaymentUserId,
                 PaymentMethodTypes = new List<string>
                 {
-                    "card",
-                    "p24",
+                    "card"
                 },
                 LineItems = new List<SessionLineItemOptions>
                 {
@@ -234,7 +233,7 @@ namespace Spice.Areas.Customer.Controllers
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             UnitAmountDecimal = (decimal)CartDetails.OrderHeader.OrderTotal * 100,
-                            Currency = "pln",
+                            Currency = "usd",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
                                 Name = CartDetails.OrderHeader.PickupName,
@@ -246,7 +245,7 @@ namespace Spice.Areas.Customer.Controllers
                 },
                 Mode = "payment",
                 SuccessUrl = "https://localhost:44378/Customer/Order/OrderSuccess?session_id={CHECKOUT_SESSION_ID}",
-                CancelUrl = "https://example.com/cancel"
+                CancelUrl = "https://localhost:44378/Customer/Order/OrderCancelled?session_id={CHECKOUT_SESSION_ID}"
             };
             var service = new SessionService();
             Session session = service.Create(options);

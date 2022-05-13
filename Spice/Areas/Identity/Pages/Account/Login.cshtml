@@ -2,7 +2,7 @@
 @model LoginModel
 
 <div class="border background-white-border mt-5 container col-sm-7 col-lg-5 col-md-7">
-    <h1>Logowanie</h1>
+    <h1>Log In</h1>
     <div class="row">
         <div class="col-md-12">
             <section>
@@ -13,7 +13,7 @@
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Input.Password" placeholder="Hasło" class="form-control" />
+                        <input asp-for="Input.Password" placeholder="Password" class="form-control" />
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -25,18 +25,18 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary form-control">Zaloguj</button>
+                        <button type="submit" class="btn btn-primary form-control">Log In</button>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-6">
-                            <a id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
                         </div>
                         <div class="col-sm-12 col-md-6 text-md-right">
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Nie masz konta?</a>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Sign In</a>
                         </div>
                     </div>
                     <div class="form-group">
-                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend verification email</a>
                     </div>
                 </form>
             </section>

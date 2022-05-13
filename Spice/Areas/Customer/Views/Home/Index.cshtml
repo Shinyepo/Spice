@@ -1,48 +1,10 @@
 ﻿@model Spice.Models.ViewModels.IndexViewModel
 
-    <img src="~/images/baner-main.png" style="z-index:-1;left:0;margin-left:0;margin-top:-1rem;object-fit:-10% 0;" class="img-fluid position-absolute" />
-    <br />
-
-    @*@if (Model.Coupon.Count() > 0)
-        {
-            <div class="border mb-5">
-                <div class="carousel" data-ride="carousel" data-interval="2500">
-                    @for (int i = 0; i < Model.Coupon.Count(); i++)
-                    {
-                        if (i == 0)
-                        {
-                            <div class="carousel-item active">
-
-                                @{
-                                    var base64 = Convert.ToBase64String(Model.Coupon.ToList()[i].Image);
-                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
-                                }
-                                <img src="@imgsrc" height="50px" class="d-block w-100" />
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="carousel-item">
-
-                                @{
-                                    var base64 = Convert.ToBase64String(Model.Coupon.ToList()[i].Image);
-                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
-                                }
-                                <img src="@imgsrc" height="50px" class="d-block w-100" />
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-        }*@
-    <br />
-    <br />
-
-    <div class="background-white container" style="margin-top:6rem;">
+    <div class="background-white container mt-1" >
 
         <ul id="menu-filters" class="menu-filter-list list-inline text-center">
             <li class="active btn btn-secondary ml-1 mr-1" data-filter=".menu-restaurant">
-                Wszystko
+                All
             </li>
             @foreach (var item in Model.Category.OrderBy(x => x.Order))
             {
@@ -108,7 +70,7 @@
 
                         },
                         error: function () {
-                            alert("Dynamic content load failed.");
+                            alert("Please Log In first.");
                         }
                     });
                 });

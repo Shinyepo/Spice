@@ -2,7 +2,7 @@
 <div class="border background-white">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-info">Lista Kategorii</h2>
+            <h2 class="text-info">Category List</h2>
         </div>
         <div class="col-6 text-right">
             <partial name="_CreateButtonPartial" />
@@ -18,7 +18,7 @@
                         @Html.DisplayNameFor(m => m.Name)
                     </th>
                     <th></th>
-                    <th class="text-right"><a asp-action="EditOrder" class="btn btn-outline-info"><i class="fas fa-sort"></i>&nbsp;Sortuj</a></th>
+                    <th class="text-right"><a asp-action="EditOrder" class="btn btn-outline-info"><i class="fas fa-sort"></i>&nbsp;Edit Order</a></th>
                 </tr>
                 @foreach (var item in Model.OrderBy(x=>x.Order))
                 {
@@ -35,7 +35,7 @@
         }
         else
         {
-            <p>Brak Kategorii.</p>
+            <p>No Categories.</p>
         }
     </div>
 </div>

@@ -20,7 +20,7 @@ namespace Spice.Utility
         public const string StatusReady = "Ready for Pick Up";
         public const string StatusReadyDelivery = "In Delivery";
         public const string StatusCompleted = "Completed";
-        public const string StatusCancelled = "Canceled";
+        public const string StatusCancelled = "Cancelled";
 
         public const string PaymentStatusPending = "Payment in Progress";
         public const string PaymentStatusApproved = "Payment Complete";
@@ -66,12 +66,12 @@ namespace Spice.Utility
                 }
                 else
                 {
-                    if (Convert.ToInt32(CouponFromDb.Type) == (int)CouponModel.ECouponType.PLN)
+                    if (Convert.ToInt32(CouponFromDb.Type) == (int)CouponModel.ECouponType.Value)
                     {
                         return Math.Round(OriginalOrderTotal - CouponFromDb.Discount, 2);
                     }
 
-                    if (Convert.ToInt32(CouponFromDb.Type) == (int)CouponModel.ECouponType.Procentowy)
+                    if (Convert.ToInt32(CouponFromDb.Type) == (int)CouponModel.ECouponType.Percent)
                     {
                         return Math.Round(OriginalOrderTotal - (OriginalOrderTotal * CouponFromDb.Discount / 100), 2);
                     }
