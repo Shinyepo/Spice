@@ -42,6 +42,7 @@ namespace Spice
 
             //services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaims>();
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            services.Configure<AppSettings>(Configuration.GetSection("Domain"));
             
             services.AddControllersWithViews();
             services.AddSession(o =>

@@ -22,13 +22,15 @@ namespace Spice.Areas.Customer.Controllers
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly AppSettings _appSettings;
 
         [BindProperty]
         public OrderDetailsViewModel CartDetails { get; set; }
 
-        public CartController(ApplicationDbContext db)
+        public CartController(ApplicationDbContext db, AppSettings appSettings)
         {
             _db = db;
+            _appSettings = appSettings;
         }
 
         public async Task<IActionResult> Index()
@@ -218,7 +220,7 @@ namespace Spice.Areas.Customer.Controllers
             CartDetails.OrderHeader.CouponCodeDiscount = CartDetails.OrderHeader.OrderTotalOriginal - CartDetails.OrderHeader.OrderTotal;
 
             var user = await _db.ApplicationUser.FirstOrDefaultAsync(x => x.Id == claim.Value);
-
+            
             var options = new SessionCreateOptions
             {
                 Customer = user.PaymentUserId,
@@ -244,8 +246,8 @@ namespace Spice.Areas.Customer.Controllers
                     },
                 },
                 Mode = "payment",
-                SuccessUrl = "https://localhost:44378/Customer/Order/OrderSuccess?session_id={CHECKOUT_SESSION_ID}",
-                CancelUrl = "https://localhost:44378/Customer/Order/OrderCancelled?session_id={CHECKOUT_SESSION_ID}"
+                SuccessUrl = "https://"+_appSettings.Domain+"/Customer/Order/OrderSuccess?session_id={CHECKOUT_SESSION_ID}",
+                CancelUrl = "https://" + _appSettings.Domain + "/Customer/Order/OrderCancelled?session_id={CHECKOUT_SESSION_ID}"
             };
             var service = new SessionService();
             Session session = service.Create(options);

@@ -1,3 +1,6 @@
 Spice/bin/
 Spice/obj/
 .vs
+bin
+obj
+Spice/Properties/

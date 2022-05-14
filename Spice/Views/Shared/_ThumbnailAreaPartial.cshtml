@@ -11,10 +11,10 @@
         {
             <div class="col-12 card-body @( item.Id == Model.Last().Id? "pb-4":"pb-0")">
                 <div class="row">
-                    <div class="col-md-3 col-sm-12">
+                    <div class="col-md-3 col-sm-12 text-center">
                         <img src="@item.Image" width="250px" height="180px" style="border-radius: 5px; border: 1px solid #bbb9b9" />
                     </div>
-                    <div class="col-md-9 cl-sm-12">
+                    <div class="col-md-9 cl-sm-12 d-flex flex-column">
                         <div class="row pr-3">
                             <div class="col-8">
                                 <h4 class="text-primary text-dark font-weight-bold d-inline-block">@item.Name</h4>
@@ -35,10 +35,10 @@
                                 <h4>$@item.Price</h4>
                             </div>
                         </div>
-                        <div class="row col-12 text-justify d-none d-md-block">
+                        <div class="row col-12 text-justify d-none d-md-block" style="max-height: 100px">
                             <p>@Html.Raw(item.Description)</p>
                         </div>
-                        <div class="col-md-3 col-sm-12 offset-md-9 text-center position-absolute" style="right:0;bottom:0;">
+                        <div class="col-md-3 col-sm-12 offset-md-9 text-center">
                             <a href="javascript:void(0);" class="btn btn-success form-control itemDetail" data-id="@item.Id">Add</a>
                         </div>
                     </div>

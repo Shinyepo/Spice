@@ -17,5 +17,6 @@
     <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_DbContextTypeFullName>Spice.Data.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
+    <NameOfLastUsedPublishProfile>C:\Work\Spice\Spice\Properties\PublishProfiles\http___192.168.1.14_5000.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

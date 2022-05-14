@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spice", "Spice\Spice.csproj", "{BB952058-1548-47EF-A44D-4CBA95F1AC47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spice", "Spice\Spice.csproj", "{BB952058-1548-47EF-A44D-4CBA95F1AC47}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8A5A65D0-E85F-4CCF-B907-684385BBAFB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BB952058-1548-47EF-A44D-4CBA95F1AC47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB952058-1548-47EF-A44D-4CBA95F1AC47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB952058-1548-47EF-A44D-4CBA95F1AC47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A5A65D0-E85F-4CCF-B907-684385BBAFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5A65D0-E85F-4CCF-B907-684385BBAFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5A65D0-E85F-4CCF-B907-684385BBAFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5A65D0-E85F-4CCF-B907-684385BBAFB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
