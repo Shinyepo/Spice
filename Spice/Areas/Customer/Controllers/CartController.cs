@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Spice.Areas.Customer.Controllers
 {
@@ -22,12 +23,12 @@ namespace Spice.Areas.Customer.Controllers
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly AppSettings _appSettings;
+        private readonly IOptions<AppSettings> _appSettings;
 
         [BindProperty]
         public OrderDetailsViewModel CartDetails { get; set; }
 
-        public CartController(ApplicationDbContext db, AppSettings appSettings)
+        public CartController(ApplicationDbContext db, IOptions<AppSettings> appSettings)
         {
             _db = db;
             _appSettings = appSettings;
@@ -153,6 +154,9 @@ namespace Spice.Areas.Customer.Controllers
             CartDetails.OrderHeader.OrderTotalOriginal = CartDetails.OrderHeader.OrderTotal;
             CartDetails.OrderHeader.PickupName = applicationuser.Name;
             CartDetails.OrderHeader.PhoneNumber = applicationuser.PhoneNumber;
+            CartDetails.OrderHeader.StreetAdress = applicationuser.StreetAdress;
+            CartDetails.OrderHeader.StreetNumber = applicationuser.StreetNumber;
+            CartDetails.OrderHeader.HouseNumber = applicationuser.HouseNumber;
             CartDetails.OrderHeader.PickupTime = DateTime.Now;
 
             if (HttpContext.Session.GetString("ssCouponCode") != null)
@@ -181,6 +185,7 @@ namespace Spice.Areas.Customer.Controllers
             CartDetails.OrderHeader.OrderDate = DateTime.Now;
             CartDetails.OrderHeader.UserId = claim.Value;
             CartDetails.OrderHeader.Status = SD.PaymentStatusPending;
+            CartDetails.OrderHeader.AdressJoined = CartDetails.OrderHeader.StreetAdress + " " + CartDetails.OrderHeader.StreetNumber + (CartDetails.OrderHeader.HouseNumber != "" ? "/"+CartDetails.OrderHeader.HouseNumber : null);
             CartDetails.OrderHeader.PickupTime = Convert.ToDateTime(CartDetails.OrderHeader.PickupDate.ToShortDateString() + " " + CartDetails.OrderHeader.PickupTime.ToShortTimeString());
 
             List<OrderDetailsModel> orderdetailslist = new List<OrderDetailsModel>();
@@ -246,8 +251,8 @@ namespace Spice.Areas.Customer.Controllers
                     },
                 },
                 Mode = "payment",
-                SuccessUrl = "https://"+_appSettings.Domain+"/Customer/Order/OrderSuccess?session_id={CHECKOUT_SESSION_ID}",
-                CancelUrl = "https://" + _appSettings.Domain + "/Customer/Order/OrderCancelled?session_id={CHECKOUT_SESSION_ID}"
+                SuccessUrl = "https://"+_appSettings.Value.Domain+"/Customer/Order/OrderSuccess?session_id={CHECKOUT_SESSION_ID}",
+                CancelUrl = "https://" + _appSettings.Value.Domain + "/Customer/Order/OrderCancelled?session_id={CHECKOUT_SESSION_ID}"
             };
             var service = new SessionService();
             Session session = service.Create(options);

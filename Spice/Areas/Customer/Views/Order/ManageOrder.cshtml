@@ -46,6 +46,12 @@
                                     </div>
                                     <input type="text" class="border rounded form-control" readonly value="@item.OrderHeader.PickupTime" />
                                 </div>
+                                <div class="input-group pb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Adress</span>
+                                    </div>
+                                    <input type="text" class="border rounded form-control" readonly value="@item.OrderHeader.AdressJoined" />
+                                </div>
                                 @{
                                     var comments = item.OrderHeader.Comments;
                                     if (comments == null || comments.Trim().Length == 0)

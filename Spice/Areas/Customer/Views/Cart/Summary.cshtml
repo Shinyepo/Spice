@@ -48,6 +48,30 @@
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-3">
+                                            <label>Street</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="@Model.OrderHeader.StreetAdress" id="txtstreet" type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>Street Number</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="@Model.OrderHeader.StreetNumber" id="txtstreetnumber" type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
+                                            <label>House Number</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input asp-for="@Model.OrderHeader.HouseNumber" id="txthousenumber" type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-3">
                                             <label>Pickup Date</label>
                                         </div>
                                         <div class="col-9">
@@ -184,7 +208,8 @@
         function getTimeFromCurrentDate() {
             var currdate = new Date();
             var minTime = "";
-
+            console.log(currdate);
+            console.log(currdate.getHours());
             if (currdate.getHours() < 11) {
                 minTime = '11:00 AM';
             } else {

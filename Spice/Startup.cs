@@ -35,6 +35,7 @@ namespace Spice
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()

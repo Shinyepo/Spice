@@ -21,6 +21,8 @@
         <input type="hidden" asp-for="MenuItem.Name" />
         <input type="hidden" asp-for="MenuItem.Price" />
         <div class="col-12">
+            @if(Model.MenuItem.Category.Name == "Pizza") {
+
             <div class="form-group row">
                 <div class="col-2">
                     <label class="col-form-label">Size</label>
@@ -29,6 +31,7 @@
                     <select id="pSize" asp-items="SizeList" onchange="calcPrize(this);" asp-for="Size" class="form-control"></select>
                 </div>
             </div>
+            }
             <div class="form-group row">
                 <div class="col-2">
                     <label asp-for="Count" class="col-form-label"></label>

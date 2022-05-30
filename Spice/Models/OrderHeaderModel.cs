@@ -56,6 +56,18 @@ namespace Spice.Models
 
         public string TransactionId { get; set; }
 
+        [Display(Name = "Street Adress")]
+        public string StreetAdress { get; set; }
+
+        [Display(Name = "Street Number")]
+        public string StreetNumber { get; set; }
+
+        [Display(Name = "House Number")]
+        public string HouseNumber { get; set; }
+
+        [Display(Name = "Adress")]
+        public string AdressJoined { get; set; }
+
 
     }
 }
