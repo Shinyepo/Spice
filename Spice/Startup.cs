@@ -56,7 +56,7 @@ namespace Spice
 
             //services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaims>();
             services.Configure<StripeSettings>(x => { x.PublishableKey = Environment.GetEnvironmentVariable("PUBLISHABLE_KEY"); x.SecretKey = Environment.GetEnvironmentVariable("SECRET_KEY"); });
-            services.Configure<AppSettings>(x=>x.Domain = Environment.GetEnvironmentVariable("DATABASE_URL"));
+            services.Configure<AppSettings>(x=>x.Domain = Environment.GetEnvironmentVariable("DOMAIN"));
             
             services.AddControllersWithViews();
             services.AddScoped<IDbInitializer, DbInitializer>();
