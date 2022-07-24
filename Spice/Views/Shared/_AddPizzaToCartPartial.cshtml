@@ -1,4 +1,4 @@
-﻿@model ShoppingCartModel
+﻿    @model ShoppingCartModel
 @using Spice.Extensions
 @{
     var SizeList = new SelectList(new List<SelectListItem>
@@ -75,9 +75,13 @@
     function calcPrize () {
         var priceField = document.getElementById("priceField");
         var input = document.getElementById("pCount");
-        var selected = document.getElementById("pSize").selectedIndex;
-
-        var totalCost = (@Model.MenuItem.Price + (4 * selected)) * input.value;
+        var selected = document.getElementById("pSize");
+        var totalCost = 0;
+        if (!selected) {
+            totalCost = @Model.MenuItem.Price * input.value;
+        } else {
+            totalCost = (@Model.MenuItem.Price + (4 * selected.selectedIndex)) * input.value;
+        }
         priceField.textContent = "$" + totalCost;
     };
     $("#btnCountPlus").click(function () {

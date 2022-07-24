@@ -132,7 +132,7 @@ namespace Spice.Areas.Customer.Controllers
         {
             CartDetails = new OrderDetailsViewModel()
             {
-                OrderHeader = new Models.OrderHeaderModel()
+                OrderHeader = new OrderHeaderModel()
             };
             CartDetails.OrderHeader.OrderTotal = 0;
 
