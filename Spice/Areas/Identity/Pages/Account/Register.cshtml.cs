@@ -108,7 +108,7 @@ namespace Spice.Areas.Identity.Pages.Account
                     PostalCode = Input.PostalCode,
                     City = Input.City,
                     Name = Input.Name,
-                    StreetAdress = Input.StreetAdress + " " + Input.StreetNumber + (Input.HouseNumber == null? "":"/"+Input.HouseNumber),
+                    StreetAdress = Input.StreetAdress,
                     StreetNumber = Input.StreetNumber,
                     HouseNumber = Input.HouseNumber,
                     PhoneNumber = Input.PhoneNumber,
@@ -172,8 +172,8 @@ namespace Spice.Areas.Identity.Pages.Account
                             }
                             else
                             {
-                                await _signInManager.SignInAsync(user, isPersistent: false);                                
                                 await _userManager.AddToRoleAsync(user, SD.CustomerEndUser);
+                                await _signInManager.SignInAsync(user, isPersistent: false);                              
                                 return LocalRedirect(returnUrl);
                             }
                         }
