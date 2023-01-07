@@ -81,11 +81,11 @@ namespace Spice.Areas.Admin.Controllers
 
 
                 string webRootPath = _hosting.WebRootPath;
-                var files = HttpContext.Request.Form.Files;
+                //var files = HttpContext.Request.Form.Files;
 
                 var menuitem = await _db.MenuItem.FindAsync(MenuItemVM.MenuItem.Id);
 
-                if (files.Count > 0)
+                /*if (files.Count > 0)
                 {
                     var uploads = Path.Combine(webRootPath, "images");
                     var extension = Path.GetExtension(files[0].FileName);
@@ -98,10 +98,10 @@ namespace Spice.Areas.Admin.Controllers
                 }
                 else
                 {
-                    var uploads = Path.Combine(webRootPath, @"images\" + SD.DefaultFoodImage);
+                    var uploads = Path.Combine(webRootPath, @"~\images\" + SD.DefaultFoodImage);
                     System.IO.File.Copy(uploads, webRootPath + @"\images\" + MenuItemVM.MenuItem.Id + ".png");
                     menuitem.Image = @"\images\" + MenuItemVM.MenuItem.Id + ".png";
-                }
+                }*/
                 menuitem.Order = _db.MenuItem.Count() + 1;
                 await _db.SaveChangesAsync();
 
@@ -136,7 +136,7 @@ namespace Spice.Areas.Admin.Controllers
 
                 var menuitem = await _db.MenuItem.FindAsync(MenuItemVM.MenuItem.Id);
 
-                if (files.Count > 0)
+                /*if (files.Count > 0)
                 {
                     var uploads = Path.Combine(webRootPath, "images");
                     var extension = Path.GetExtension(files[0].FileName);
@@ -153,7 +153,7 @@ namespace Spice.Areas.Admin.Controllers
                         files[0].CopyTo(filestream);
                     }
                     menuitem.Image = @"\images\" + MenuItemVM.MenuItem.Id + extension;
-                }
+                }*/
 
                 menuitem.Name = MenuItemVM.MenuItem.Name;
                 menuitem.Price = MenuItemVM.MenuItem.Price;
@@ -201,13 +201,13 @@ namespace Spice.Areas.Admin.Controllers
             {
                 var fromdb = await _db.MenuItem.FindAsync(id);
 
-                string webRootPath = _hosting.WebRootPath;
-                var imagePath = Path.Combine(webRootPath, fromdb.Image.TrimStart('\\'));
+                //string webRootPath = _hosting.WebRootPath;
+                //var imagePath = Path.Combine(webRootPath, fromdb.Image.TrimStart('\\'));
 
-                if (System.IO.File.Exists(imagePath))
+                /*if (System.IO.File.Exists(imagePath))
                 {
                     System.IO.File.Delete(imagePath);
-                }
+                }*/
 
                 _db.MenuItem.Remove(fromdb);
                 await _db.SaveChangesAsync();

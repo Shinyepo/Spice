@@ -32,7 +32,7 @@ namespace Spice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var env = Environment.GetEnvironmentVariable("DATABASE_URL");
+            /*var env = Environment.GetEnvironmentVariable("DATABASE_URL");
             var raw = env.Split("/");
 
             var builder = new NpgsqlConnectionStringBuilder
@@ -42,10 +42,11 @@ namespace Spice
                 Password = raw[2].Split(":")[1].Split("@")[0],
                 Port = Convert.ToInt32(raw[2].Split(":")[2]),
                 Database = raw[3]
-            };
+            };*/
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(builder.ToString()));
+                options.UseNpgsql(Configuration["DatabaseUrl"]));
+
 
             //services.AddDatabaseDeveloperPageExceptionFilter();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -55,8 +56,10 @@ namespace Spice
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             //services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaims>();
-            services.Configure<StripeSettings>(x => { x.PublishableKey = Environment.GetEnvironmentVariable("PUBLISHABLE_KEY"); x.SecretKey = Environment.GetEnvironmentVariable("SECRET_KEY"); });
-            services.Configure<AppSettings>(x=>x.Domain = Environment.GetEnvironmentVariable("DOMAIN"));
+            //services.Configure<StripeSettings>(x => { x.PublishableKey = Environment.GetEnvironmentVariable("PUBLISHABLE_KEY"); x.SecretKey = Environment.GetEnvironmentVariable("SECRET_KEY"); });
+            services.Configure<StripeSettings>(x => { x.PublishableKey = Configuration["Stripe:PublishableKey"]; x.SecretKey = Configuration["Stripe:SecretKey"]; });
+            //services.Configure<AppSettings>(x=>x.Domain = Environment.GetEnvironmentVariable("DOMAIN"));
+            services.Configure<AppSettings>(x=>x.Domain = Configuration["Domain"]);
             
             services.AddControllersWithViews();
             services.AddScoped<IDbInitializer, DbInitializer>();
@@ -71,7 +74,8 @@ namespace Spice
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInit)
         {
-            StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("SECRET_KEY");
+            //StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("SECRET_KEY");
+            StripeConfiguration.ApiKey = Configuration["Stripe:SecretKey"];
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
